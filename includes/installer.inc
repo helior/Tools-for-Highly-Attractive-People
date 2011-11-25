@@ -13,7 +13,7 @@
 function hap_installer_hap_info() {
   return array(
     'name' => 'Installer',
-    'description' => 'The Official Installer App for "Tools for Highly Attractive People".',
+    'description' => 'This is the highly attractive installer made for highly attractive people.',
     'hooks' => array('menu', 'theme', 'modules_enabled'),
     'always enabled' => TRUE,
   );
@@ -24,7 +24,7 @@ function hap_installer_hap_info() {
  */
 function hap_installer_menu() {
   $items['admin/config/hap/installer'] = array(
-    'title' => '★ Attractive Installer',
+    'title' => '★ Highly Attractive Installer',
     'description' => 'Configure which tools you want to enable to interact with hooks.',
     'page callback' => 'drupal_get_form',
     'page arguments' => array('hap_installer_form'),
