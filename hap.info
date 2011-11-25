@@ -1,3 +1,6 @@
 name = Tools for Highly Attractive People
 description = Good stuff, 'nuff said.
 core = 7.x
+version = 7.x-1.0
+configure = admin/config/hap
+package = Tools for Highly Attractive People
