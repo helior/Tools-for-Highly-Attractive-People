@@ -5,6 +5,12 @@
  *  Provides interface and logic to enable/disable tools from interacting with
  *  Drupal's hook system. It also manages whether tools can have dependencies
  *  between each other and external modules.
+ * 
+ * @todo Prevent tools from being disabled when modules require them.
+ * @todo Automatically flush certain caches when certain tools are enabled/disabled.
+ * @todo Garbage collection when tools are disabled.
+ * @todo Reset hap_hooks and hap_hooks_used variables when cache is cleared.
+ * @todo Emergency reset to rebuild all tools and flush caches. (All of the above must first be implemented).
  */
  
 /**
