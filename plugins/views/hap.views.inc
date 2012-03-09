@@ -11,7 +11,7 @@ function hap_views_plugins() {
         'help' => t('Omits wrapping divs for each row.'),
         'handler' => 'views_plugin_style',
         'theme' => 'hap_nah_views_plugin_style',
-        'theme path' => drupal_get_path('module', 'hap') . '/plugins/views/style',
+        'theme path' => drupal_get_path('module', 'hap') . '/plugins/views/style/nah',
         'theme file' => 'theme.inc',
         'uses row plugin' => TRUE,
         'uses row class' => FALSE,
