@@ -13,9 +13,7 @@ $plugin = array(
   'settings form' => 'hap_planking_layout_settings_form',
   'builder' => TRUE,
   'regions function' => 'hap_planking_regions',
-  'default' => array(
-    'rows' => 1,
-  ),
+  'default' => array('rows' => 1),
 );
 
 /**
@@ -39,8 +37,10 @@ function hap_planking_regions($display, $settings, $layout) {
   hap_include('format');
   $regions = array();
 
-  foreach (range(1, $settings['rows']) as $row) {
-    $regions[$row] = hap_format_ordinal($row);
+  if (!empty($settings['rows'])) {
+    foreach (range(1, $settings['rows']) as $row) {
+      $regions[$row] = hap_format_ordinal($row);
+    }
   }
 
   return $regions;
