@@ -2,9 +2,9 @@
 
 // @todo pull in these regex patterns from http://html5pattern.com/
 
-define('ATOOLS_REGEX__SUPPORTED_PROTOCOLS', 'http|https|ssh|ftp|git|svn');
+define('HAP_REGEX_SUPPORTED_PROTOCOLS', 'http|https|ssh|ftp|git|svn');
 
-define('ATOOLS_REGEX_FILE', '
+define('HAP_REGEX_FILE', '
   /
     (?P<filename>                 # Capture the entire filename
       (?P<basename>[\w\d\-_]+)    # Capture the base name of the file
@@ -13,7 +13,7 @@ define('ATOOLS_REGEX_FILE', '
   /x');
 
 
-define('ATOOLS_REGEX_URL', '
+define('HAP_REGEX_URL', '
   /^                                          # Anchor to beginning of string
     (?P<url>                                  # Capture entire URL @see RFC 3986
       (?P<protocol>(?:[\w][\w\d+\-.]*)):\/\/  # Capture the protocol protocol
@@ -26,7 +26,7 @@ define('ATOOLS_REGEX_URL', '
 
 /**
  * Similar to preg_match, but $matches only contains named captures.
- * 
+ *
  * Note: this function is almost 4 times slower than simply running preg_match,
  * because we are taking the extra time to filter through the matches to remove
  * numeric keys. You should only really use this if the numeric indexes annoy

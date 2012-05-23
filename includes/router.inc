@@ -3,7 +3,7 @@
 // @todo only search for subdomain + hostname, because currently the original
 // path will only have its hostname portion replaced with the configured
 // replacement url.
-define('ATOOLS_ROUTER_URL', '
+define('HAP_ROUTER_URL', '
   /^                                          # Anchor to beginning of string
     (?P<url>                                  # Capture entire URL @see RFC 3986
       (?P<protocol>(?:[\w][\w\d+\-.]*)):\/\/  # Capture the protocol protocol
@@ -59,7 +59,7 @@ function hap_router_url_outbound_alter(&$path, &$options, $original_path) {
     // Using regex.inc to parse the extension out of the path and determine if
     // it is a routable file-type.
     if (_hap_router_is_routable($path)) {
-      if (preg_match(ATOOLS_ROUTER_URL, $path, $matches)) {
+      if (preg_match(HAP_ROUTER_URL, $path, $matches)) {
         $path = str_replace($matches['hostname'], variable_get('hap_router_host', '') , $path);
       }     
     }

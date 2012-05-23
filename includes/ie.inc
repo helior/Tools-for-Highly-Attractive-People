@@ -1,6 +1,6 @@
 <?php
 
-define('ATOOLS_IE_6_UPDATE_URL', 'hap/update/ie6');
+define('HAP_IE_6_UPDATE_URL', 'hap/update/ie6');
 
 /**
  * Implements hook_hap_info().
@@ -24,7 +24,7 @@ function hap_ie_hap_info() {
  * Implements hook_menu().
  */
 function hap_ie_menu() {
-  $items[ATOOLS_IE_6_UPDATE_URL] = array(
+  $items[HAP_IE_6_UPDATE_URL] = array(
     'page callback' => 'hap_blank_page',
     'page arguments' => array(hap_blank_arguments('theme', array('hap_ie_update_6'))),
     'access arguments' => array('access content'),
@@ -58,14 +58,14 @@ function hap_ie_page_build() {
       '#tag' => 'meta',
       '#attributes' => array(
         'http-equiv' => 'refresh',
-        'content' => '0;url=/' . ATOOLS_IE_6_UPDATE_URL,
+        'content' => '0;url=/' . HAP_IE_6_UPDATE_URL,
       ),
       '#browsers' => array(
         'IE' => 'lte IE 6',
         '!IE' => FALSE,
       ),
     ),
-    '#access' => ($_GET['q'] != ATOOLS_IE_6_UPDATE_URL),
+    '#access' => ($_GET['q'] != HAP_IE_6_UPDATE_URL),
   );
   
   drupal_add_html_head($ie6, 'ie6');
