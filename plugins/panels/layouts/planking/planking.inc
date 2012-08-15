@@ -7,7 +7,7 @@
 
 $plugin = array(
   'title' => t('Planking'),
-  'category' => t('Columns: 1'),
+  'category' => t('Highly Attractive'),
   'icon' => 'planking.png',
   'theme' => 'hap_planking_panels_layout',
   'settings form' => 'hap_planking_layout_settings_form',

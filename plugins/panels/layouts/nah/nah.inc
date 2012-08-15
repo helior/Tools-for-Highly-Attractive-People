@@ -7,7 +7,7 @@
 
 $plugin = array(
   'title' => t('Nah..'),
-  'category' => t('Columns: 1'),
+  'category' => t('Highly Attractive'),
   'icon' => 'nah.png',
   'theme' => 'hap_nah_panels_layout',
   'regions' => array(
