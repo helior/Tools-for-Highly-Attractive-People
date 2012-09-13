@@ -31,7 +31,7 @@ function hap_ie_menu() {
     'file path' => hap_path(),
     'file' => 'blank.inc',
   );
-  
+
   return $items;
 }
 
@@ -67,6 +67,6 @@ function hap_ie_page_build() {
     ),
     '#access' => ($_GET['q'] != HAP_IE_6_UPDATE_URL),
   );
-  
+
   drupal_add_html_head($ie6, 'ie6');
 }

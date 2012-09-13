@@ -40,10 +40,10 @@ function hap_panels_assets() {
         );
       }
     }
-    
+
     drupal_alter('hap_panels_assets', $assets);
   }
-  
+
   return $assets;
 }
 
@@ -84,10 +84,10 @@ function hap_panels_assets_panels_post_render($renderer) {
  */
 function hap_panels_assets_form_panels_panel_context_edit_content_alter(&$form, &$form_state) {
   $options = _hap_panels_assets_options();
-  
+
   // Drop out if there are no options.
   if (empty($options)) return;
-  
+
   $display = $form_state['display'];
   $form['#submit'][] = '_hap_panels_assets_panels_panel_context_edit_content_submit';
   $form['hap_panels_assets'] = array(

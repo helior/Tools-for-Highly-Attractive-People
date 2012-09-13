@@ -40,16 +40,16 @@ function hap_features_export_options() {
 function hap_features_export($data, &$export, $module_name = '') {
   $info = hap_info();
   $pipe = array();
-  
+
   $processors = array(
     'modules' => 'dependencies',
     'tools' => 'hap',
   );
-  
+
   foreach ($data as $component) {
     // Add self to exports
     $export['hap'][$component] = $component;
-    
+
     // Add dependencies to exports via pipeline
     foreach ($processors as $type => $processor) {
       if (isset($info[$component]['dependencies'][$type]) && is_array($info[$component]['dependencies'][$type])) {
@@ -60,7 +60,7 @@ function hap_features_export($data, &$export, $module_name = '') {
     }
   }
 
-  return $pipe;  
+  return $pipe;
 }
 
 
@@ -77,10 +77,10 @@ function hap_features_revert($module) {
  */
 function hap_features_rebuild($module) {
   $status = hap_list();
-  
+
   // Get feature meta data
   $feature = features_get_features($module);
-  
+
   // If has tool dependencies...
   if (!empty($feature->info['hap'])) {
     $install = array();
@@ -91,7 +91,7 @@ function hap_features_rebuild($module) {
         $install[] = $tools;
       }
     }
-    
+
     // Enable applicable tools
     if (!empty($install)) {
       hap_turn_on($install);

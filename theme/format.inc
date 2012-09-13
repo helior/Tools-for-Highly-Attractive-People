@@ -9,14 +9,14 @@ function theme_hap_format_definition_list($variables) {
   foreach ($variables['items'] as $item) {
     $items .= '<dt>' . $item['term'] . '</dt>';
     $definitions = '';
-    
+
     foreach ($item['data'] as $definition) {
       $definitions .= '<dd>' . $definition . '</dd>';
     }
-    
+
     $items .= $definitions;
   }
-  
+
   return '<dl' . drupal_attributes($variables['attributes']) . '>' . $items . '</dl>';
 }
 

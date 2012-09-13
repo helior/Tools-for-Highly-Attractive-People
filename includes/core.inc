@@ -35,7 +35,7 @@ function hap_core_menu() {
  * Array structure that helps build a table of content for groups of menu
  * items. Typically added using array addition to a basic array definition
  * defined by YOU! Observe:
- * 
+ *
  * @code
  *  hap_include();
  *  function myModule_menu() {

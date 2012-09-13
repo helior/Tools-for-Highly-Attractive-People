@@ -5,14 +5,14 @@
  *  Provides interface and logic to enable/disable tools from interacting with
  *  Drupal's hook system. It also manages whether tools can have dependencies
  *  between each other and external modules.
- * 
+ *
  * @todo Prevent tools from being disabled when modules require them.
  * @todo Automatically flush certain caches when certain tools are enabled/disabled.
  * @todo Garbage collection when tools are disabled.
  * @todo Reset hap_hooks and hap_hooks_used variables when cache is cleared.
  * @todo Emergency reset to rebuild all tools and flush caches. (All of the above must first be implemented).
  */
- 
+
 /**
  * Implementation of hook_hap_info().
  */
@@ -38,7 +38,7 @@ function hap_installer_menu() {
     'file' => 'installer.inc',
     'file path' => hap_path(),
   );
-  
+
   return $items;
 }
 
@@ -132,12 +132,12 @@ function hap_installer_rebuild_hooks() {
     foreach ($info[$tool]['hooks'] as $hook) {
       // Builds hook-to-tools relationship.
       $hooks[$hook][] = $tool;
-      
+
       // Track all utilized hooks, prevent duplicate entries.
       $hooks_used[$hook] = $hook;
     }
   }
-  
+
   variable_set('hap_hooks', $hooks);
   variable_set('hap_hooks_used', $hooks_used);
 }
@@ -158,14 +158,14 @@ function _hap_installer_config_change($config) {
   $current = hap_installer_enabled();
   $change = array();
   $status = FALSE;
-  
+
   // Compare current and configured for extracting tools to disable.
   foreach ($current as $tool) {
     if (!$config[$tool]) {
       $change[] = $tool;
     }
   }
-  
+
   // If nothing has changed we look for differences in current and config to
   // determine tools that are being enabled.
   if (empty($change)) {
@@ -180,7 +180,7 @@ function _hap_installer_config_change($config) {
 /******************************************************************************
  * Form handlers
  *****************************************************************************/
- 
+
 function hap_installer_form($form, $form_state) {
   $tools = hap_info();
   $form_state['values'] = isset($form_state['values']) ? $form_state['values'] : array('tools' => variable_get('hap_enabled', array()));
@@ -201,7 +201,7 @@ function hap_installer_form($form, $form_state) {
       'css' => array(hap_path('css') . '/installer.css'),
     ),
   );
-  
+
   foreach ($tools as $name => $info) {
     $form['tools'][$name] = array(
       '#type' => 'checkbox',
@@ -216,16 +216,16 @@ function hap_installer_form($form, $form_state) {
         'wrapper' => 'hap-installer-tools',
       ),
     );
-    
+
     $info['machine_name'] = $name;
-    
+
     // Add additional descriptions regarding dependencies for modules and tools
     _hap_installer_process_tool_description($form['tools'][$name], $form_state, $info);
-    
+
     // process checkboxes to add #disabled = TRUE where appropriate.
     _hap_installer_process_tool_status($form['tools'][$name], $form_state, $info);
   }
-  
+
   return $form;
 }
 
@@ -245,12 +245,12 @@ function _hap_installer_process_tool_description(&$element, &$form_state, $info)
   foreach (array('modules', 'tools') as $type) {
     $func = '_hap_installer_are_' . $type . '_enabled';
     $dependencies = array();
-    
+
     foreach ($info['dependencies'][$type] as $dependency) {
       $state = ($func($dependency, $form_state)) ? 'enabled' : 'disabled';
       $dependencies[] = $dependency . ' (<span class="admin-' . $state . '">' . $state . '</span>)';
     }
-    
+
     if (!empty($dependencies)) {
       $description .= '<div>' . $type . ' required: ' . implode(', ', $dependencies) . '</div>';
     }
@@ -269,7 +269,7 @@ function _hap_installer_process_tool_status(&$element, &$form_state, $info) {
     $element['#value'] = TRUE;
     $element['#disabled'] = TRUE;
   }
-  
+
   else {
     // Check if other enabled tools depend on THIS tool, that way we can
     // disable interaction to this checkbox.
@@ -284,7 +284,7 @@ function _hap_installer_process_tool_status(&$element, &$form_state, $info) {
         }
       }
     }
-    
+
     // We need to check if a tool has a dependency with other modules and prevent
     // them from getting installed if the dependency is not itself enabled.
     else {

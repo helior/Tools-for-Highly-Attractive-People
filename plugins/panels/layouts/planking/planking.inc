@@ -37,10 +37,8 @@ function hap_planking_regions($display, $settings, $layout) {
   hap_include('format');
   $regions = array();
 
-  if (!empty($settings['rows'])) {
-    foreach (range(1, $settings['rows']) as $row) {
-      $regions[$row] = hap_format_ordinal($row);
-    }
+  foreach (range(1, $settings['rows']) as $row) {
+    $regions[$row] = hap_format_ordinal($row);
   }
 
   return $regions;

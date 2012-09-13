@@ -26,7 +26,7 @@ function hap_format_theme() {
         'attributes' => array(),
       ),
     ),
-    
+
     // Formats a date. This was originally created for Drupal's date form
     // element.
     'hap_format_date' => array(
@@ -48,7 +48,7 @@ function hap_format_theme() {
 
 /**
  * Output a number in its ordinal form.
- * 
+ *
  * Example 9 becomes 9th, 32 becomes 32nd, 101 becomes 101st, and so on. Note
  * that this is appropriate for English-based strings and may not translate
  * well in other languages.
@@ -75,7 +75,7 @@ function hap_format_ordinal($number){
 function hap_format_seperator() {
   $elements = func_get_args();
   $seperator = array_shift($elements);
-  
+
   foreach ($elements as $key => &$element) {
     if (empty($element)) {
       unset($elements[$key]);

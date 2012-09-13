@@ -44,11 +44,11 @@ function hap_router_menu() {
     'file path' => hap_path(),
     'file' => 'router.inc',
   );
-  
+
   return $items;
 }
 
-  
+
 /**
  * Implements hook_url_outbound_alter().
  */
@@ -61,7 +61,7 @@ function hap_router_url_outbound_alter(&$path, &$options, $original_path) {
     if (_hap_router_is_routable($path)) {
       if (preg_match(HAP_ROUTER_URL, $path, $matches)) {
         $path = str_replace($matches['hostname'], variable_get('hap_router_host', '') , $path);
-      }     
+      }
     }
   }
 }
@@ -75,18 +75,18 @@ function hap_router_url_outbound_alter(&$path, &$options, $original_path) {
  * Form builder for hap_router_settings().
  */
 function hap_router_settings($form, &$form_state) {
-  
+
   $form['files'] = array(
     '#type' => 'fieldset',
     '#title' => t('Files'),
   );
-  
+
   $form['files']['hap_router_file_enabled'] = array(
     '#type' => 'checkbox',
     '#title' => 'Enable file router',
     '#default_value' => variable_get('hap_router_file_enabled', 0),
   );
-  
+
   $form['files']['hap_router_host'] = array(
     '#type' => 'textfield',
     '#title' => 'Host',
@@ -98,7 +98,7 @@ function hap_router_settings($form, &$form_state) {
       ),
     ),
   );
-  
+
   $form['files']['hap_router_file_types'] = array(
     '#type' => 'checkboxes',
     '#title' => t('Allowable file-types'),
@@ -120,7 +120,7 @@ function hap_router_settings($form, &$form_state) {
 
 /**
  * Helper function that checks if a path has a qualified extention for hap
- * to re-route. 
+ * to re-route.
  */
 function _hap_router_is_routable($path) {
   return in_array(substr(strrchr($path, '.'), 1), _hap_router_get_file_types());
@@ -142,6 +142,6 @@ function _hap_router_get_file_types() {
       }
     }
   }
-  
+
   return $file_types;
 }
