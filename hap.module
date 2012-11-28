@@ -13,7 +13,9 @@ include_once('hap.hooks.inc');
  * Implements hook_ctools_plugin_directory().
  */
 function hap_ctools_plugin_directory($owner, $api) {
-  return "plugins/$owner/$api";
+  if (in_array($owner, array('ctools', 'panels', 'views'))) {
+    return "plugins/$owner/$api";
+  }
 }
 
 /**
