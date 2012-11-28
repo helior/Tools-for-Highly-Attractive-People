@@ -27,6 +27,8 @@ function hap_timeago_content_type_edit_form($form, &$form_state) {
     '#title' => t('Granularity'),
     '#description' => t('How many different units to display in the string.'),
     '#default_value' => $conf['granularity'],
+    '#element_validate' => array('element_validate_integer_positive'),
+    '#maxlength' => 1,
     '#size' => 1,
   );
 
