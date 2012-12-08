@@ -67,16 +67,16 @@ function template_preprocess_hap_nah_style_render_pane(&$vars) {
  * Theme callback for regions.
  */
 function theme_hap_nah_style_render_region($vars) {
-  $attributes = drupal_attributes($vars['attributes_array']);
   $output = '';
   foreach ($vars['panes'] as $item) {
-    if ($vars['settings']['no_wrapper']) {
-      $output .= $item;
-    }
-    else {
-      $output .= '<div ' . $attributes . '>' . $item . '</div>';
-    }
+    $output .= $item;
   }
+
+  if ($vars['settings']['no_wrapper']) {
+    $attributes = drupal_attributes($vars['attributes_array']);
+    $output = '<div ' . $attributes . '>' . $output . '</div>';
+  }
+
   return $output;
 }
 
