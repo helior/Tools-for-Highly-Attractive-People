@@ -43,7 +43,6 @@ function hap_nah_style_settings_form($conf) {
  */
 function hap_nah_style_preprocessor(&$vars) {
   $vars['attributes_array'] = array();
-  $vars['attributes_array']['class'][] = 'nah';
   if ($vars['settings']['class']) {
     $vars['attributes_array']['class'][] = $vars['settings']['class'];
   }
