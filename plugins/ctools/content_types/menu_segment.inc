@@ -21,7 +21,7 @@ function hap_menu_segment_content_type_edit_form($form, &$form_state) {
   $form['menu'] = array(
     '#type' => 'select',
     '#title' => t('Menu'),
-    '#options' => menu_get_menus(),
+    '#options' => module_exists('menu') ? menu_get_menus() : menu_list_system_menus(),
     '#default_value' => $form_state['conf']['menu'],
   );
 
