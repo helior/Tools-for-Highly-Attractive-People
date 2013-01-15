@@ -49,6 +49,7 @@ function hap_include($file = NULL) {
   // core.inc is always included.
   if (!$core) {
     require_once DRUPAL_ROOT . '/' . hap_path() . "/core.inc";
+    $files['core'] = TRUE;
     $core = TRUE;
   }
 
