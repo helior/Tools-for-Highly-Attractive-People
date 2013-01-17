@@ -12,7 +12,7 @@ $plugin = array(
   'title' => t('Pass-through'),
   'category' => t('Highly Attractive'),
   'icon' => 'passthrough.png',
-  'theme' => 'bthap_layouts_passthrough',
+  'theme' => 'hap_layouts_passthrough',
   'regions' => array(
     'page' => t('Page'),
   ),
@@ -21,6 +21,6 @@ $plugin = array(
 /**
  * Theme callback.
  */
-function theme_bthap_layouts_passthrough($variables) {
+function theme_hap_layouts_passthrough($variables) {
   return $variables['content']['page'];
 }
