@@ -53,10 +53,15 @@ function hap_menu_get_link_recursive($tree, $link_path) {
   foreach (element_children($tree) as $mlid) {
     if ($tree[$mlid]['#original_link']['link_path'] == $link_path) {
       $segment = $tree[$mlid];
-      break;
     }
     elseif (!empty($tree[$mlid]['#below'])) {
       $segment = hap_menu_get_link_recursive($tree[$mlid]['#below'], $link_path);
+    }
+
+    // If we've already got something, break out of the loop to return the
+    // segment.
+    if (!empty($segment)) {
+      break;
     }
   }
 
