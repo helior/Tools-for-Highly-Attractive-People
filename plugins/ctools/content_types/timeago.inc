@@ -6,7 +6,7 @@
 // pass through format_interval()
 
 $plugin = array(
-  'title' => t('Time Ago..'),
+  'title' => t('★ Time Ago..'),
   'description' => t('Formats a time interval with requested granularity.'),
   'required context' => new ctools_context_required(t('Node'), 'node'),
   'category' => t('Node'),
