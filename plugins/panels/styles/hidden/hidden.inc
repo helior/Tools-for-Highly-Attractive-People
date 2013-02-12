@@ -4,7 +4,7 @@
  * Always returns an empty string.
  */
 $plugin = array(
-  'title' => t('Hidden'),
+  'title' => t('★ Hidden'),
   'description' => t('Always returns an empty string.'),
   'render region' => 'hap_hidden_style_render_region',
   'render pane' => 'hap_hidden_style_render_pane',

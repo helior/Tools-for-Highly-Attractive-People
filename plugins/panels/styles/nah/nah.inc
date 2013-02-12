@@ -1,7 +1,7 @@
 <?php
 
 $plugin = array(
-  'title' => t('Nah..'),
+  'title' => t('★ Nah..'),
   'description' => t('This style can ommit all wrapping markup or have a single wrapping div with a configurable class.'),
   'render region' => 'hap_nah_style_render_region',
   'render pane' => 'hap_nah_style_render_pane',

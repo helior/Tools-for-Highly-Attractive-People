@@ -1,7 +1,7 @@
 <?php
 
 $plugin = array(
-  'title' => t('Custom Header'),
+  'title' => t('★ Custom Header'),
   'description' => t('Choose a heading level for your region or pane title.'),
   'render region' => 'hap_custom_header_style_render_region',
   'render pane' => 'hap_custom_header_style_render_pane',

@@ -7,7 +7,7 @@ function hap_views_plugins() {
   return array(
     'style' => array(
       'nah' => array(
-        'title' => t('Nah..'),
+        'title' => t('★ Nah..'),
         'help' => t('Omits wrapping divs for each row.'),
         'handler' => 'views_plugin_style',
         'theme' => 'hap_nah_views_plugin_style',
