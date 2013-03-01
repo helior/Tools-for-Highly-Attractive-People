@@ -65,10 +65,12 @@ function hap_timeago_content_type_render($subtype, $conf, $panel_args, $context)
 
   $node = $context->data;
   $time = $node->{$conf['field']};
+  $nid = $node->nid;
+  drupal_add_js(array('hap_timeago' => array('node-'.$nid => $time)), 'setting');
   $format_interval = format_interval(REQUEST_TIME - $time, $conf['granularity']);
   $element = new stdClass();
   $element->module = 'hap';
-  $element->content = '<span class="time-ago">' . t('!time ago', array('!time' => $format_interval)) . '</span>';
+  $element->content = '<span class="time-ago time-ago-node-' . $nid .'">' . t('!time ago', array('!time' => $format_interval)) . '</span>';
 
   return $element;
 }
