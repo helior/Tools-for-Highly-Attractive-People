@@ -76,14 +76,14 @@ function hap_timeago_content_type_render($subtype, $conf, $panel_args, $context)
   $class = '';
   if ($conf['js_render']) {
     $nid = $node->nid;
-    drupal_add_js(array('hap_timeago' => array('node-'.$nid => $time)), 'setting');
+    drupal_add_js(array('hap_timeago' => array('node-' . $nid => $time)), 'setting');
     $class = 'time-ago-node-' . $nid;
   }
 
   $format_interval = format_interval(REQUEST_TIME - $time, $conf['granularity']);
   $element = new stdClass();
   $element->module = 'hap';
-  $element->content = '<span class="time-ago ' . $class .'">' . t('!time ago', array('!time' => $format_interval)) . '</span>';
+  $element->content = '<span class="time-ago ' . $class . '">' . t('!time ago', array('!time' => $format_interval)) . '</span>';
 
   return $element;
 }
