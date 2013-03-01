@@ -15,6 +15,7 @@ $plugin = array(
     'field' => 'created',
     'js_render' => 0,
   ),
+  'js' => ctools_add_js('timeago', 'hap'),
 );
 
 /**
