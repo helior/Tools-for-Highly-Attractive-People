@@ -19,6 +19,16 @@ function hap_ctools_plugin_directory($owner, $api) {
 }
 
 /**
+ * Implements hook_ctools_plugin_pre_alter().
+ */
+function hap_ctools_plugin_pre_alter(&$plugin, &$info) {
+  // Add some general js funstion to process all rendered timeago elements.
+  if ($plugin['module'] == 'hap' && $plugin['name'] == 'timeago') {
+    drupal_add_js(drupal_get_path('module', 'hap') . '/js/timeago.js');
+  }
+}
+
+/**
  * Implements hook_views_api().
  */
 function hap_views_api() {
