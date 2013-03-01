@@ -13,6 +13,7 @@ $plugin = array(
   'defaults' => array(
     'granularity' => 2,
     'field' => 'created',
+    'js_render' => 0,
   ),
 );
 
@@ -43,6 +44,13 @@ function hap_timeago_content_type_edit_form($form, &$form_state) {
     '#default_value' => $conf['field'],
   );
 
+  $form['js_render'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Render using javascript'),
+    '#description' => t('If checked, will render the from js. Using this to compensate heavy caching like a reverse proxy.'),
+    '#default_value' => $conf['js_render'],
+  );
+
   return $form;
 }
 
@@ -65,12 +73,17 @@ function hap_timeago_content_type_render($subtype, $conf, $panel_args, $context)
 
   $node = $context->data;
   $time = $node->{$conf['field']};
-  $nid = $node->nid;
-  drupal_add_js(array('hap_timeago' => array('node-'.$nid => $time)), 'setting');
+  $class = '';
+  if ($conf['js_render']) {
+    $nid = $node->nid;
+    drupal_add_js(array('hap_timeago' => array('node-'.$nid => $time)), 'setting');
+    $class = 'time-ago-node-' . $nid;
+  }
+
   $format_interval = format_interval(REQUEST_TIME - $time, $conf['granularity']);
   $element = new stdClass();
   $element->module = 'hap';
-  $element->content = '<span class="time-ago time-ago-node-' . $nid .'">' . t('!time ago', array('!time' => $format_interval)) . '</span>';
+  $element->content = '<span class="time-ago ' . $class .'">' . t('!time ago', array('!time' => $format_interval)) . '</span>';
 
   return $element;
 }
