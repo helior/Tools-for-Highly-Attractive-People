@@ -1,4 +1,4 @@
-/* 
+/*
  * Proccess all timeago span tags.
  */
 
@@ -28,7 +28,7 @@ function timeAgo(current, previous) {
     var elapsed = current - previous;
 
     if (elapsed < msPerMinute) {
-        return Math.round(elapsed/1000) + '' + Drupal.t('seconds ago');
+        return Math.round(elapsed/1000) + ' ' + Drupal.t('seconds ago');
     }
 
     else if (elapsed < msPerHour) {
