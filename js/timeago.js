@@ -28,26 +28,26 @@ function timeAgo(current, previous) {
     var elapsed = current - previous;
 
     if (elapsed < msPerMinute) {
-        return Math.round(elapsed/1000) + ' ' + Drupal.t('seconds ago');
+        return  Drupal.formatPlural(Math.round(elapsed/1000), '1 second ago', '@count seconds ago');
     }
 
     else if (elapsed < msPerHour) {
-        return Math.round(elapsed/msPerMinute) + ' ' + Drupal.t('minutes ago');
+        return  Drupal.formatPlural(Math.round(elapsed/msPerMinute), '1 minute ago', '@count minutes ago');
     }
 
     else if (elapsed < msPerDay ) {
-        return Math.round(elapsed/msPerHour ) + ' ' + Drupal.t('hours ago');
+        return Drupal.formatPlural(Math.round(elapsed/msPerHour ), '1 hour ago', '@count hours ago');
     }
 
     else if (elapsed < msPerMonth) {
-        return Math.round(elapsed/msPerDay) + ' ' + Drupal.t('days ago');
+        return Drupal.formatPlural(Math.round(elapsed/msPerDay), '1 day ago', '@count days ago');
     }
 
     else if (elapsed < msPerYear) {
-        return Math.round(elapsed/msPerMonth) + ' ' + Drupal.t('months ago');
+        return Drupal.formatPlural(Math.round(elapsed/msPerMonth), '1 month ago', '@count months ago');
     }
 
     else {
-        return Math.round(elapsed/msPerYear ) + ' ' + Drupal.t('years ago');
+        return Drupal.formatPlural(Math.round(elapsed/msPerYear ), '1 year ago', '@count years ago');
     }
 }
