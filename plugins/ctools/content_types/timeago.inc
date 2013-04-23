@@ -74,6 +74,13 @@ function hap_timeago_content_type_render($subtype, $conf, $panel_args, $context)
 
   $node = $context->data;
   $time = $node->{$conf['field']};
+
+  // If hap_publication_date is enabled we use the custom field.
+  if (module_exists('hap_publication_date') && !empty($node->published)) {
+    $time = $node->published;
+  }
+
+  $time = $node->{$conf['field']};
   $class = '';
   if ($conf['js_render']) {
     $nid = $node->nid;

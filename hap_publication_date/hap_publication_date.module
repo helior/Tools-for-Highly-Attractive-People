@@ -1,0 +1,41 @@
+<?php
+
+/**
+ * @file
+ * hap_publication_date.module
+ */
+
+/**
+ * Implements hook_node_presave().
+ *
+ */
+function hap_publication_date_node_presave($node) {
+  if (empty($node->published) && $node->status) {
+    $node->published = REQUEST_TIME;
+  }
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ *
+ * We want to let the node author override the
+ * content type default threshold and window settings.
+ *
+ */
+function hap_publication_date_form_node_form_alter(&$form, $form_state) {
+  $type = $form['#node']->type;
+  $form['options']['published'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Published on'),
+    '#maxlength' => 25,
+    '#description' => t('Format: %time. The date format is YYYY-MM-DD and %timezone is the time zone offset from UTC. Leave blank to use the time of form submission.', array('%time' => !empty($node->date) ? date_format(date_create($node->published), 'Y-m-d H:i:s O') : format_date($node->created, 'custom', 'Y-m-d H:i:s O'), '%timezone' => !empty($node->published) ? date_format(date_create($node->published), 'O') : format_date($node->created, 'custom', 'O'))),
+    '#default_value' => !empty($node->published) ? $node->published : '',
+  );
+}
+
+function hap_publication_date_node_validate($node, $form, $form_state) {
+  // Validate the "published on" field.
+  if (!empty($node->published) && strtotime($node->published) === FALSE) {
+    form_set_error('published', t('You have to specify a valid date.'));
+  }
+}

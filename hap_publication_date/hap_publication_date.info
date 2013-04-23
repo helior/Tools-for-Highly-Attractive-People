@@ -1,0 +1,5 @@
+name = Custom Publication Date for Highly Attractive People
+description = This module add a custom field into node table to manage publication date.
+core = 7.x
+
+dependencies[] = node
