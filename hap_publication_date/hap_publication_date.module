@@ -23,7 +23,7 @@ function hap_publication_date_node_presave($node) {
  *
  */
 function hap_publication_date_form_node_form_alter(&$form, $form_state) {
-  $type = $form['#node']->type;
+  $node = $form['#node'];
   $form['options']['published'] = array(
     '#type' => 'textfield',
     '#title' => t('Published on'),
