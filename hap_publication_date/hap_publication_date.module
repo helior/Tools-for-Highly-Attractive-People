@@ -10,8 +10,13 @@
  *
  */
 function hap_publication_date_node_presave($node) {
-  if (empty($node->published) && $node->status) {
-    $node->published = REQUEST_TIME;
+  if (empty($node->published)) {
+    if ($node->status) {
+      $node->published = REQUEST_TIME;
+    }
+  }
+  else {
+    $node->published = strtotime($node->published);
   }
 }
 
@@ -33,9 +38,21 @@ function hap_publication_date_form_node_form_alter(&$form, $form_state) {
   );
 }
 
+/**
+ * Implements hook_node_validate().
+ */
 function hap_publication_date_node_validate($node, $form, $form_state) {
   // Validate the "published on" field.
   if (!empty($node->published) && strtotime($node->published) === FALSE) {
     form_set_error('published', t('You have to specify a valid date.'));
+  }
+}
+
+/**
+ * Implements hook_node_prepare().
+ */
+function hap_publication_date_node_prepare($node) {
+  if (!empty($node->published)) {
+    $node->published = format_date($node->published, 'custom', 'Y-m-d H:i:s O');
   }
 }
