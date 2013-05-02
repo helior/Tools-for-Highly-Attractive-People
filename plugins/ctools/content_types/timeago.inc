@@ -80,7 +80,6 @@ function hap_timeago_content_type_render($subtype, $conf, $panel_args, $context)
     $time = $node->published;
   }
 
-  $time = $node->{$conf['field']};
   $class = '';
   if ($conf['js_render']) {
     $nid = $node->nid;
