@@ -33,7 +33,7 @@ function hap_publication_date_form_node_form_alter(&$form, $form_state) {
     '#type' => 'textfield',
     '#title' => t('Published on'),
     '#maxlength' => 25,
-    '#description' => t('Format: %time. The date format is YYYY-MM-DD and %timezone is the time zone offset from UTC. Leave blank to use the time of form submission.', array('%time' => !empty($node->date) ? date_format(date_create($node->published), 'Y-m-d H:i:s O') : format_date($node->created, 'custom', 'Y-m-d H:i:s O'), '%timezone' => !empty($node->published) ? date_format(date_create($node->published), 'O') : format_date($node->created, 'custom', 'O'))),
+    '#description' => t('Format: %time. The date format is YYYY-MM-DD and %timezone is the time zone offset from UTC. Leave blank to use the time of form submission.', array('%time' => !empty($node->published) ? date_format(date_create($node->published), 'Y-m-d H:i:s O') : format_date($node->created, 'custom', 'Y-m-d H:i:s O'), '%timezone' => !empty($node->published) ? date_format(date_create($node->published), 'O') : format_date($node->created, 'custom', 'O'))),
     '#default_value' => !empty($node->published) ? $node->published : '',
   );
 }
