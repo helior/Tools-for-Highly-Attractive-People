@@ -7,7 +7,7 @@
  */
 
 $plugin = array(
-  'title' => t("Not Paged"),
+  'title' => t("★ Not Paged"),
   'description' => t('Control access by pager indicator in URL.'),
   'callback' => 'hap_not_paged_access_check',
   'summary' => 'hap_not_paged_access_summary',
