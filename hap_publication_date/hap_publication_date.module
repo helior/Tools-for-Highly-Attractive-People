@@ -75,6 +75,7 @@ function hap_publication_date_views_data_alter(&$data) {
     ),
     'filter' => array(
       'handler' => 'views_handler_filter_date',
+      'is date' => TRUE,
     ),
   );
 }
