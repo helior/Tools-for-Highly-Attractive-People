@@ -83,3 +83,23 @@ function hap_format_seperator() {
   }
   return implode($seperator, $elements);
 }
+
+/**
+ * This replicates the functionality PHP's http_build_url(). You can use this
+ * function if your copy of PHP was not compiled with the HTTP extension.
+ *
+ * @param  array $parts return value of parse_url()
+ * @return a string representation of the URL.
+ */
+function hap_format_unparse_url($parts) {
+  $scheme = isset($parts['scheme']) ? $parts['scheme'] . '://' : '';
+  $host = isset($parts['host']) ? $parts['host'] : '';
+  $port = isset($parts['port']) ? ':' . $parts['port'] : '';
+  $user = isset($parts['user']) ? $parts['user'] : '';
+  $pass = isset($parts['pass']) ? ':' . $parts['pass'] : '';
+  $pass = ($user || $pass) ? "$pass@" : '';
+  $path = isset($parts['path']) ? $parts['path'] : '';
+  $query = isset($parts['query']) ? '?' . $parts['query'] : '';
+  $fragment = isset($parts['fragment']) ? '#' . $parts['fragment'] : '';
+  return "$scheme$user$pass$host$port$path$query$fragment";
+}
