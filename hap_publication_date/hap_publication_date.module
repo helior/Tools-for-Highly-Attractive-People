@@ -16,7 +16,8 @@ function hap_publication_date_node_presave($node) {
     }
   }
   else {
-    $node->published = strtotime($node->published);
+    // Date values are converted from ISO strings to timestamp if needed.
+    $node->published = is_numeric($node->published) ? $node->published : strtotime($node->published, REQUEST_TIME);
   }
 }
 
