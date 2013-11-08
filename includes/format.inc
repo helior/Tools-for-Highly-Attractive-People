@@ -94,7 +94,7 @@ function hap_format_seperator() {
 function hap_format_unparse_url($parts) {
   $scheme = isset($parts['scheme']) ? $parts['scheme'] . '://' : '';
   $host = isset($parts['host']) ? $parts['host'] : '';
-  $port = isset($parts['port']) ? ':' . $parts['port'] : '';
+  $port = isset($parts['port']) && $parts['port'] != '80' ? ':' . $parts['port'] : '';
   $user = isset($parts['user']) ? $parts['user'] : '';
   $pass = isset($parts['pass']) ? ':' . $parts['pass'] : '';
   $pass = ($user || $pass) ? "$pass@" : '';
