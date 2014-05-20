@@ -72,7 +72,9 @@ function theme_hap_nah_style_render_region($vars) {
     $output .= $item;
   }
 
-  if ($vars['settings']['no_wrapper']) {
+  // The colleciton of panes can get a wrapper if required, but most of the time
+  // you want to explicitely tell it not to include a wrapper div.
+  if (empty($vars['settings']['no_wrapper'])) {
     $attributes = drupal_attributes($vars['attributes_array']);
     $output = '<div ' . $attributes . '>' . $output . '</div>';
   }
