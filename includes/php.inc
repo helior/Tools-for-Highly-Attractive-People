@@ -23,5 +23,5 @@ function hap_array_filter_recursive($input, $callback = null) {
     }
   }
 
-  return array_filter($input, $callback);
+  return $callback ? array_filter($input, $callback) : array_filter($input);
 }
