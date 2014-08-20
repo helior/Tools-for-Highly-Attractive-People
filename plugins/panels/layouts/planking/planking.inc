@@ -13,7 +13,7 @@ $plugin = array(
   'settings form' => 'hap_planking_layout_settings_form',
   'builder' => TRUE,
   'regions function' => 'hap_planking_regions',
-  'default' => array('rows' => 1),
+  'default' => array('rows' => 1, 'wrap_regions' => FALSE),
 );
 
 /**
@@ -23,8 +23,14 @@ function hap_planking_layout_settings_form($display, $layout, $conf) {
   $form['rows'] = array(
     '#type' => 'textfield',
     '#title' => t('Number of Rows'),
-    '#default_value' => $conf['rows'],
+    '#default_value' => isset($conf['rows']) ? $conf['rows'] : 1,
     '#size' => '3',
+  );
+
+  $form['wrap_regions'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Wrap region content with divs'),
+    '#default_value' => isset($conf['wrap_regions']) ? $conf['wrap_regions'] : FALSE,
   );
 
   return $form;
@@ -65,7 +71,16 @@ function template_preprocess_hap_planking_panels_layout(&$vars) {
  */
 function theme_hap_planking_panels_layout($vars) {
   $output  = '<div' . drupal_attributes($vars['attributes_array']) . '>';
-  $output .= implode("\n", $vars['content']);
+
+  if (isset($vars['settings']['wrap_regions']) && $vars['settings']['wrap_regions']) {
+    hap_include('format');
+    foreach ($vars['content'] as $delta => $content) {
+      $output .= '<div class="planking-' . hap_format_ordinal($delta) . '-region">' . $content . '</div>';
+    }
+  }
+  else {
+    $output .= implode("\n", $vars['content']);
+  }
   $output .= '</div>';
   return $output;
 }
