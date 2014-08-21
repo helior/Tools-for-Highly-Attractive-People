@@ -14,13 +14,9 @@ $plugin = array(
  * Render callback.
  */
 function hap_anchor_content_type_render($subtype, $conf, $panel_args, $context) {
-  $output = '<hr ';
-  $output .= !empty($conf['class']) ? 'class="' . $conf['class'] . '" ' : '';
-  $output .= '/>';
-
   $element = new stdClass();
   $element->module = 'hap';
-  $element->content = $output;
+  $element->content = '<a name="' . $conf['name'] . '">';
 
   return $element;
 
