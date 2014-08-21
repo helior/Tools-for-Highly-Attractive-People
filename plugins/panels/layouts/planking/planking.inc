@@ -75,7 +75,9 @@ function theme_hap_planking_panels_layout($vars) {
   if (isset($vars['settings']['wrap_regions']) && $vars['settings']['wrap_regions']) {
     hap_include('format');
     foreach ($vars['content'] as $delta => $content) {
-      $output .= '<div class="planking-' . hap_format_ordinal($delta) . '-region">' . $content . '</div>';
+      if (!empty($content)) {
+        $output .= '<div class="plank plank-' . hap_format_ordinal($delta) . '-region"><div class="plank-inner">' . $content . '</div></div>';
+      }
     }
   }
   else {
