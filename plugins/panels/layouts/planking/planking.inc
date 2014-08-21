@@ -76,7 +76,15 @@ function theme_hap_planking_panels_layout($vars) {
     hap_include('format');
     foreach ($vars['content'] as $delta => $content) {
       if (!empty($content)) {
-        $output .= '<div class="plank plank-' . hap_format_ordinal($delta) . '-region"><div class="plank-inner">' . $content . '</div></div>';
+        $classes = array('plank', 'plank-' . hap_format_ordinal($delta) . '-region');
+        if ($delta === 0) {
+          $classes[] = 'first';
+        }
+        else if (count($vars['content']) === $delta + 1) {
+          $classes[] = 'last';
+        }
+
+        $output .= '<div class="' . explode('', $classes) . '"><div class="plank-inner">' . $content . '</div></div>';
       }
     }
   }
