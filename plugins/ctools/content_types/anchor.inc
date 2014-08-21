@@ -16,7 +16,7 @@ $plugin = array(
 function hap_anchor_content_type_render($subtype, $conf, $panel_args, $context) {
   $element = new stdClass();
   $element->module = 'hap';
-  $element->content = '<a name="' . $conf['name'] . '">';
+  $element->content = '<a name="' . $conf['name'] . '"></a>';
 
   return $element;
 
