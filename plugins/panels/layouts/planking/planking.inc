@@ -42,6 +42,7 @@ function hap_planking_layout_settings_form($display, $layout, $conf) {
 function hap_planking_regions($display, $settings, $layout) {
   hap_include('format');
   $regions = array();
+  $settings['rows'] = isset($settings['rows']) ? $settings['rows'] : 1;
 
   foreach (range(1, $settings['rows']) as $row) {
     $regions[$row] = hap_format_ordinal($row);
@@ -77,14 +78,14 @@ function theme_hap_planking_panels_layout($vars) {
     foreach ($vars['content'] as $delta => $content) {
       if (!empty($content)) {
         $classes = array('plank', 'plank-' . hap_format_ordinal($delta) . '-region');
-        if ($delta === 0) {
+        if ($delta === 1) {
           $classes[] = 'first';
         }
-        else if (count($vars['content']) === $delta + 1) {
+        else if (count($vars['content']) === $delta) {
           $classes[] = 'last';
         }
 
-        $output .= '<div class="' . explode('', $classes) . '"><div class="plank-inner">' . $content . '</div></div>';
+        $output .= '<div class="' . implode(' ', $classes) . '"><div class="plank-inner">' . $content . '</div></div>';
       }
     }
   }
