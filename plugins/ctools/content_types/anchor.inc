@@ -6,7 +6,7 @@ $plugin = array(
   'category' => t('Miscellaneous'),
   'no title override' => TRUE,
   'defaults' => array(
-    'name' => '',
+    'id' => '',
   ),
 );
 
@@ -16,7 +16,7 @@ $plugin = array(
 function hap_anchor_content_type_render($subtype, $conf, $panel_args, $context) {
   $element = new stdClass();
   $element->module = 'hap';
-  $element->content = '<a name="' . $conf['name'] . '"></a>';
+  $element->content = '<a id="' . $conf['id'] . '"></a>';
 
   return $element;
 
@@ -26,12 +26,12 @@ function hap_anchor_content_type_render($subtype, $conf, $panel_args, $context) 
  * Settings form callback.
  */
 function hap_anchor_content_type_edit_form($form, &$form_state) {
-  $form['name'] = array(
+  $form['id'] = array(
     '#type' => 'textfield',
-    '#title' => t('Name'),
-    '#description' => t('Provide the name for your anchor so you can link to it with a url fragment.'),
+    '#title' => t('ID attribute'),
+    '#description' => t('Provide the identifier for your anchor so you can link to it with a url fragment.'),
     '#required' => TRUE,
-    '#default_value' => $form_state['conf']['name'],
+    '#default_value' => $form_state['conf']['id'],
   );
 
   return $form;
@@ -50,5 +50,5 @@ function hap_anchor_content_type_edit_form_submit($form, &$form_state) {
  * Admin title callback.
  */
 function hap_anchor_content_type_admin_title($subtype, $conf, $context) {
-  return t('%label named anchor', array('%label' => $conf['name']));
+  return t('%label named anchor', array('%label' => $conf['id']));
 }
