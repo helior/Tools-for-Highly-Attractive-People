@@ -54,7 +54,13 @@ function hap_include($file = NULL) {
   }
 
   if ($file && !isset($files[$file])) {
-    require_once DRUPAL_ROOT . '/' . hap_path() . "/$file.inc";
+    $path = DRUPAL_ROOT . '/' . hap_path() . "/$file.inc";
+    // Make sure a file exists before trying to include it, but still track that
+    // we at least looked.
+    if (file_exists($path)) {
+      require_once $path;
+    }
+
     $files[$file] = TRUE;
   }
 }
