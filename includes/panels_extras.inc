@@ -5,7 +5,6 @@
  *  Adds all kinds of fun stuff to Panels.
  */
 
-
 /**
  * Implements hook_hap_info().
  */
@@ -25,9 +24,9 @@ function hap_panels_extras_hap_info() {
  */
 function hap_panels_extras_theme() {
   return array(
-    'hap_panels_extras_page' => array(
+    'hap_panels_extras_passthrough_page' => array(
       'path' => hap_path('theme'),
-      'file' => 'hap_panels_extras.inc',
+      'file' => 'panels-extras.inc',
       'render element' => 'page',
     ),
   );
@@ -62,16 +61,27 @@ function hap_panels_extras_ctools_render_alter($info, $page, $context) {
     foreach ($conf['hap_panels_extras']['assets'] as $asset) {
       foreach (array('css', 'js', 'library') as $type) {
         if (!empty($assets[$asset][$type])) {
-          $function = 'drupal_add_' . $type;
-          foreach ($assets[$asset][$type] as $item) {
-            call_user_func_array($function, $item);
+          foreach ($assets[$asset][$type] as $data => $options) {
+            // If the value is not an array, it's a filename and passed as first
+            // (and only) argument.
+            if (!is_array($options)) {
+              $data = $options;
+              $options = NULL;
+            }
+            // In some cases, the first parameter ($data) is an array. Arrays
+            // can't be passed as keys in PHP, so we have to get $data from the
+            // value array.
+            if (is_numeric($data)) {
+              $data = $options['data'];
+              unset($options['data']);
+            }
+            call_user_func('drupal_add_' . $type, $data, $options);
           }
         }
       }
     }
   }
 }
-
 
 /**
  * Implements hook_form_FORM_ID_alter().
@@ -102,9 +112,11 @@ function hap_panels_extras_form_panels_panel_context_edit_settings_alter(&$form,
 
   $assets_options = _hap_panels_extras_assets_options();
   $form['hap_panels_extras']['assets'] = array(
-    '#type' => 'checkboxes',
+    '#type' => 'select',
     '#options' => $assets_options,
-    '#title' => 'Highly Attractive Panels Assets',
+    '#empty_option' => t('- Choose an asset -'),
+    '#multiple' => TRUE,
+    '#title' => 'Assets',
     '#access' => !empty($assets_options),
     '#default_value' => isset($conf['hap_panels_extras']['assets']) ? $conf['hap_panels_extras']['assets'] : NULL,
     '#description' => t('In Themepacket methodology, it is important that a theme packets is responsible for styling and adding behaviors to their OWN markup, and never assume relationships with external elements. That said, Panel layout plugins should not assume theme packets embedded within them, likewise, theme packets should not assume layout (width, float, margin, etc) in respect to its Panel layout. The solution is to include "application-level" stylesheets and scripts that act as the "integration" assets.'),
