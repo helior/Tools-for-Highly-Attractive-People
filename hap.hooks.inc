@@ -65,6 +65,15 @@ if (hap_uses_hook('modules_enabled')) {
 }
 
 /**
+ * Implements hook_ctools_render_alter().
+ */
+if (hap_uses_hook('ctools_render_alter')) {
+  function hap_ctools_render_alter($info, $page, $context) {
+    hap_proxy('ctools_render_alter', $info, $page, $context);
+  }
+}
+
+/**
  * Implements hook_form_panels_panel_context_edit_content_alter().
  */
 if (hap_uses_hook('form_panels_panel_context_edit_content_alter')) {
@@ -74,10 +83,19 @@ if (hap_uses_hook('form_panels_panel_context_edit_content_alter')) {
 }
 
 /**
+ * Implements hook_form_panels_panel_context_edit_settings_alter().
+ */
+if (hap_uses_hook('form_panels_panel_context_edit_settings_alter')) {
+  function hap_form_panels_panel_context_edit_settings_alter(&$form, &$form_state) {
+    hap_proxy('form_panels_panel_context_edit_settings_alter', $form, $form_state);
+  }
+}
+
+/**
  * Implements hook_panels_post_render().
  */
 if (hap_uses_hook('panels_post_render')) {
-  function hap_panels_post_render($renderer) {
-    hap_proxy('panels_post_render', $renderer);
+  function hap_panels_post_render($display, $renderer) {
+    hap_proxy('panels_post_render', $display, $renderer);
   }
 }
