@@ -1,0 +1,4 @@
+name = HAP Test
+hidden = TRUE
+core = 7.x
+dependencies[] = hap

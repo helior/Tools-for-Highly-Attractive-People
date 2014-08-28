@@ -1,0 +1,21 @@
+<?php
+
+/**
+ * Implements hook_hap_panels_extras_assets().
+ */
+function hap_test_hap_panels_extras_assets() {
+  return array(
+    'hap_test_black_bg' => array(
+      'label' => 'HAP Test: Black BG',
+      'css' => array(
+        drupal_get_path('module', 'hap_test') . '/css/black-bg.css',
+      ),
+    ),
+    'hap_test_alert_hello' => array(
+      'label' => 'HAP Test: Alert Hello',
+      'js' => array(
+        drupal_get_path('module', 'hap_test') . '/js/alert-hello.js',
+      ),
+    ),
+  );
+}
