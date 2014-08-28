@@ -201,7 +201,10 @@ function hap_proxy($hook, &$arg1 = NULL, &$arg2 = NULL, &$arg3 = NULL, &$arg4 = 
     }
 
     $function = 'hap_' . $tool . '_' . $hook;
-    $result = $function($arg1, $arg2, $arg3, $arg4, $arg5);
+    if (function_exists($function)) {
+      $result = $function($arg1, $arg2, $arg3, $arg4, $arg5);
+    }
+
     // @fixme this is an aweful approach to arbitrary number of arguments for
     // hook implementations.
     if (isset($result) && is_array($result)) {
