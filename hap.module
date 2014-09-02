@@ -60,6 +60,9 @@ function hap_include($file = NULL) {
     if (file_exists($path)) {
       require_once $path;
     }
+    else {
+      watchdog('hap', 'The file %file.inc does not exist in Tools for Highly Attractive People.', array('%file' => $file), WATCHDOG_WARNING);
+    }
 
     $files[$file] = TRUE;
   }
